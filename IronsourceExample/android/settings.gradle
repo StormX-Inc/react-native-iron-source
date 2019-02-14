@@ -1,5 +1,0 @@
-rootProject.name = 'IronsourceExample'
-include ':react-native-ironsource'
-project(':react-native-ironsource').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ironsource/android')
-
-include ':app'

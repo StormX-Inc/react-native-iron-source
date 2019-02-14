@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rf1804/react-native-ironsource.git",
-    "baseUrl": "https://github.com/rf1804/react-native-ironsource"
+    "url": "git+https://github.com/StormX-Inc/react-native-ironsource.git",
+    "baseUrl": "https://github.com/StormX-Inc/react-native-ironsource"
   },
-  "homepage": "https://github.com/rf1804/react-native-ironsource#readme",
+  "homepage": "https://github.com/StormX-Inc/react-native-ironsource#readme",
   "bugs": {
-    "url": "https://github.com/rf1804/react-native-ironsource/issues"
+    "url": "https://github.com/StormX-Inc/react-native-ironsource/issues"
   },
   "keywords": [
     "react",
