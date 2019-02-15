@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.license    = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Mohamad Arif Raja" => "rfraja2943@gmail.com" }
-  s.pl0atform     = :ios, "7.0"
-  s.source       = { :git => "#{package_json["repository"]["url"]}.git", :tag => "#{s.version}" }
+  s.platform     = :ios, "7.0"
+  s.source       = { :git => "#{package["repository"]["url"]}.git", :tag => "#{s.version}" }
   s.compiler_flags = '–ObjC'
 
   s.source_files = "ios/**/*.{h,m}"
