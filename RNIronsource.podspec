@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.author       = { "Mohamad Arif Raja" => "rfraja2943@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "#{package["repository"]["url"]}.git", :tag => "#{s.version}" }
-  s.compiler_flags = '–ObjC'
+  s.compiler_flags = '-ObjC'
 
   s.source_files = "ios/**/*.{h,m}"
   s.requires_arc = true
