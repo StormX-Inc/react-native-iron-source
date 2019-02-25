@@ -1,12 +1,7 @@
 package com.ironsource;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,21 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ironsource.adapters.supersonicads.SupersonicConfig;
-import com.ironsource.mediationsdk.EBannerSize;
 import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.IronSourceBannerLayout;
-import com.ironsource.mediationsdk.integration.IntegrationHelper;
 import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.Placement;
-import com.ironsource.mediationsdk.sdk.BannerListener;
-import com.ironsource.mediationsdk.sdk.InterstitialListener;
 import com.ironsource.mediationsdk.sdk.OfferwallListener;
-import com.ironsource.mediationsdk.sdk.RewardedVideoListener;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class IronSourceActivity extends Activity implements RewardedVideoListener, OfferwallListener, InterstitialListener {
+public class IronSourceActivity extends Activity implements OfferwallListener {
 
     private final String TAG = "IronSourceActivity";
     private String APP_KEY = "4ea90fad";
