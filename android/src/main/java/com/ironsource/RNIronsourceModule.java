@@ -25,6 +25,7 @@ public class RNIronsourceModule extends ReactContextBaseJavaModule {
     intent.putExtra("AppKey",appkey);
     intent.putExtra("userId",userid);
     intent.putExtra("AdsType",adtype);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
   }
 }
