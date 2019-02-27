@@ -57,7 +57,6 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
 
     private void initIronSource(String appKey, String userId) {
         IronSource.setOfferwallListener(this);
-        SupersonicConfig.getConfigObj().setClientSideCallbacks(true);
         IronSource.setUserId(userId);
         IronSource.init(this, appKey);
         IronSource.shouldTrackNetworkState(this, true);
