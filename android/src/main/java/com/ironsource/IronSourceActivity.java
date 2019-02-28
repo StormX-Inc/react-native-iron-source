@@ -66,14 +66,12 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
     protected void onResume() {
         super.onResume();
         IronSource.onResume(this);
-       // updateButtonsState();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         IronSource.onPause(this);
-       // updateButtonsState();
     }
 
     /**
@@ -96,6 +94,9 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
             }
         });
 
+        if (available) {
+            IronSource.showOfferwall();
+        }
     }
 
     @Override
@@ -120,7 +121,7 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
     @Override
     public boolean onOfferwallAdCredited(int credits, int totalCredits, boolean totalCreditsFlag) {
         Log.d(TAG, "onOfferwallAdCredited" + " credits:" + credits + " totalCredits:" + totalCredits + " totalCreditsFlag:" + totalCreditsFlag);
-        isFinished= true;
+        isFinished = true;
         IronSource.shouldTrackNetworkState(IronSourceActivity.this,false);
         finish();
         return false;
