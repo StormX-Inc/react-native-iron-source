@@ -59,7 +59,6 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
         IronSource.setOfferwallListener(this);
         IronSource.setUserId(userId);
         IronSource.init(this, appKey);
-        IronSource.shouldTrackNetworkState(this, true);
     }
 
     @Override
@@ -122,7 +121,6 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
     public boolean onOfferwallAdCredited(int credits, int totalCredits, boolean totalCreditsFlag) {
         Log.d(TAG, "onOfferwallAdCredited" + " credits:" + credits + " totalCredits:" + totalCredits + " totalCreditsFlag:" + totalCreditsFlag);
         isFinished = true;
-        IronSource.shouldTrackNetworkState(IronSourceActivity.this,false);
         finish();
         return false;
     }
