@@ -1,6 +1,7 @@
 
 #import "VideoVC.h"
 #import <IronSource/IronSource.h>
+#import <IronSource/ISConfigurations.h>
 
 @interface VideoVC () <ISOfferwallDelegate>
 
@@ -16,6 +17,12 @@
         printf("Crash due to empty adtype");
     }
     if (![IronSource hasOfferwall]) {
+        NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
+        parameters[@"client_session_ip"] = _UserIp;
+        parameters[@"session_id"] = _SessionId;
+        parameters[@"timestamp"] = _Timestamp;
+        [ISConfigurations configurations].offerwallCustomParameters = parameters;
+
         [IronSource initWithAppKey:_AppKey adUnits:@[_AdsType]];
         [IronSource setOfferwallDelegate:self];
         [IronSource setUserId: _userId];

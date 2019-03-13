@@ -1,31 +1,32 @@
-
 package com.ironsource;
 
 import android.content.Intent;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 public class RNIronsourceModule extends ReactContextBaseJavaModule {
 
-  public RNIronsourceModule(ReactApplicationContext reactContext) {
-    super(reactContext);
-  }
+    public RNIronsourceModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
 
-  @Override
-  public String getName() {
-    return "RNIronsource";
-  }
+    @Override
+    public String getName() {
+        return "RNIronsource";
+    }
 
-  @ReactMethod
-  public void startIronSource(String appkey, String userid, String adtype) {
-    ReactApplicationContext context = getReactApplicationContext();
-    Intent intent = new Intent(context, IronSourceActivity.class);
-    intent.putExtra("AppKey",appkey);
-    intent.putExtra("userId",userid);
-    intent.putExtra("AdsType",adtype);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    context.startActivity(intent);
-  }
+    @ReactMethod
+    public void startIronSource(String appkey, String userid, String adtype, String ip, String session, String timestamp) {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, IronSourceActivity.class);
+        intent.putExtra(IronSourceActivity.appKey, appkey);
+        intent.putExtra(IronSourceActivity.userId, userid);
+        intent.putExtra(IronSourceActivity.userIp, ip);
+        intent.putExtra(IronSourceActivity.sessionId, session);
+        intent.putExtra(IronSourceActivity.timestamp, timestamp);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 }

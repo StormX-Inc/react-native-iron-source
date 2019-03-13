@@ -19,11 +19,14 @@
     return dispatch_get_main_queue();
 }
 RCT_EXPORT_MODULE();
-RCT_EXPORT_METHOD(startIronSource:(NSString *)appkey userid:(NSString *)userid adtype:(NSString *)adtype) {
+RCT_EXPORT_METHOD(startIronSource:(NSString *)appkey userid:(NSString *)userid adtype:(NSString *)adtype userIp:(NSString *)userIp sessionId:(NSString *)sessionId timestamp:(NSString *)timestamp) {
     VideoVC *video = [[VideoVC alloc] initWithNibName:@"VideoVC" bundle:nil];
     video.AppKey = appkey;
     video.userId = userid;
     video.AdsType = adtype;
+    video.UserIp = userIp;
+    video.SessionId = sessionId;
+    video.Timestamp = timestamp;
     
     UIViewController *root = [[[UIApplication sharedApplication] delegate] window].rootViewController;
     

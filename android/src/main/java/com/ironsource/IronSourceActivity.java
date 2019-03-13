@@ -4,61 +4,70 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ironsource.adapters.supersonicads.SupersonicConfig;
 import com.ironsource.mediationsdk.IronSource;
-import com.ironsource.mediationsdk.IronSourceBannerLayout;
 import com.ironsource.mediationsdk.logger.IronSourceError;
-import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.sdk.OfferwallListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class IronSourceActivity extends Activity implements OfferwallListener {
 
     private final String TAG = "IronSourceActivity";
-    private String APP_KEY = "4ea90fad";
-    private String USER_ID = "userId";
+    private String APP_KEY = "";
+    private String USER_ID = "";
+    private String USER_IP = "";
+    private String SESSION_ID = "";
+    private String TIMESTAMP = "";
 
-    private Placement mPlacement;
-
-    private FrameLayout mBannerParentLayout;
     private ProgressBar progressBar;
-    private IronSourceBannerLayout mIronSourceBannerLayout;
-    private final String  AppKey="AppKey";
-    private final String userId="userId";
-    private final String AdsType="AdsType";
-    private boolean  isFinished = false;
-    private final String IS_REWARDED_VIDEO="IS_REWARDED_VIDEO";
-    private final String IS_OFFERWALL="offerwall";
-    private final String IS_BANNER="IS_BANNER";
-    private final String IS_INTERSTITIAL="IS_INTERSTITIAL";
+    public static final String appKey = "AppKey";
+    public static final String userId = "userId";
+    public static final String userIp = "userIp";
+    public static final String sessionId = "sessionId";
+    public static final String timestamp = "timestamp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-        if(getIntent().hasExtra(AppKey) && getIntent().hasExtra(userId)){
-            APP_KEY=getIntent().getStringExtra(AppKey);
-            USER_ID=getIntent().getStringExtra(userId);
+
+        if (getIntent().hasExtra(appKey) && getIntent().hasExtra(userId)) {
+            APP_KEY = getIntent().getStringExtra(appKey);
+            USER_ID = getIntent().getStringExtra(userId);
+            USER_IP = getIntent().getStringExtra(userIp);
+            SESSION_ID = getIntent().getStringExtra(sessionId);
+            TIMESTAMP = getIntent().getStringExtra(timestamp);
 
             //IntegrationHelper.validateIntegration(this);
             initUIElements();
-            initIronSource(APP_KEY, USER_ID);
+            initIronSource(APP_KEY, USER_ID, USER_IP, SESSION_ID, TIMESTAMP);
 
             if (IronSource.isOfferwallAvailable()) {
                 IronSource.showOfferwall();
             }
-        }else {
-           Toast.makeText(this,"Something went wong",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Something went wong", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void initIronSource(String appKey, String userId) {
+    private void initIronSource(String appKey, String userId, String ip, String sessionId, String timestamp) {
         IronSource.setOfferwallListener(this);
         IronSource.setUserId(userId);
+        setCustomParams(ip, sessionId, timestamp);
         IronSource.init(this, appKey);
+    }
+
+    private void setCustomParams(String ip, String sessionId, String timestamp) {
+        Map<String, String> params = new HashMap<>();
+        params.put("client_session_ip", ip);
+        params.put("session_id", sessionId);
+        params.put("timestamp", timestamp);
+        SupersonicConfig.getConfigObj().setOfferwallCustomParams(params);
     }
 
     @Override
@@ -77,7 +86,6 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
      * initialize the UI elements of the activity
      */
     private void initUIElements() {
-        mBannerParentLayout = (FrameLayout) findViewById(R.id.banner_footer);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
@@ -120,7 +128,6 @@ public class IronSourceActivity extends Activity implements OfferwallListener {
     @Override
     public boolean onOfferwallAdCredited(int credits, int totalCredits, boolean totalCreditsFlag) {
         Log.d(TAG, "onOfferwallAdCredited" + " credits:" + credits + " totalCredits:" + totalCredits + " totalCreditsFlag:" + totalCreditsFlag);
-        isFinished = true;
         finish();
         return false;
     }
